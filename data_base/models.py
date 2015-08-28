@@ -31,7 +31,7 @@ class Feed(models.Model):
   time = models.DateTimeField(auto_now=True)
   progress = models.IntegerField(null=False)
   duration = models.BigIntegerField(max_length=20,null=False)
-  visible = models.BooleanField()
+  visible = models.BooleanField(default=False)
   user = models.ForeignKey(User)
   tag = models.ManyToManyField(Tag)
 
