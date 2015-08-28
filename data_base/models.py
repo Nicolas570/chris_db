@@ -43,7 +43,7 @@ class Patient(models.Model):
   patient_name = models.CharField(max_length=200)
   gender = models.CharField(max_length=200)
   dob = models.DateField()
-  age = models.IntegerField()
+  age = models.IntegerField(default=0)
   pathology = models.CharField(max_length=200,null=False)
   mrn = models.CharField(max_length=200)
 
@@ -58,10 +58,10 @@ class Study(models.Model):
   station_name = models.CharField(max_length=200,null=False)
   manufacturer_name = models.CharField(max_length=200,null=False)
   body_part_name = models.CharField(max_length=200)
-  slice_thickness = models.IntegerField()
-  echo_time = models.FloatField()
-  magnetic_field_strenght = models.IntegerField()
-  inversion_time = models.IntegerField()
+  slice_thickness = models.IntegerField(default=0)
+  echo_time = models.FloatField(default=0)
+  magnetic_field_strenght = models.IntegerField(default=0)
+  inversion_time = models.IntegerField(default=0)
   patient = models.ForeignKey(Patient)
 
   def __str__(self):
