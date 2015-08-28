@@ -100,3 +100,10 @@ class Reviews(models.Model):
 
   def __str__(self):
       return self.reviews_name
+
+
+class Token(models.Model):
+  value = models.CharField(max_length=200,null=False)
+
+  def __str__(self):
+      return self.value
