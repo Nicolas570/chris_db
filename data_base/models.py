@@ -2,7 +2,7 @@
 
 from django.db import models
 
-class Goup(models.Model):
+class Group(models.Model):
     group_name = models.CharField(max_length=200,null=False)
 
     def __str__(self):
@@ -15,6 +15,15 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag_name
 
+
+class User(models.Model):
+  user_name = models.CharField(max_length=200,null=False)
+  password = models.CharField(max_length=200,null=False)
+  email = models.EmailField(max_length=200,null=False)
+  membership = models.ManyToManyField(Group)
+
+  def __str__(self):
+      return self.user_name
 
 
 class Feed(models.Model):
@@ -30,14 +39,33 @@ class Feed(models.Model):
       return self.feed_name
 
 
-class User(models.Model):
-  user_name = models.CharField(max_length=200,null=False)
-  password = models.CharField(max_length=200,null=False)
-  email =  = models.EmailField(max_length=200,null=False)
-  membership = models.ManyToManyField(Group)
+class Patient(models.Model):
+  patient_name = models.CharField(max_length=200)
+  gender = models.CharField(max_length=200)
+  dob = models.DateField()
+  age = models.IntegerField()
+  pathology = models.CharField(max_length=200,null=False)
+  mrn = models.CharField(max_length=200)
 
   def __str__(self):
-      return self.user_name
+      return self.patient_name
+
+
+class Study(models.Model):
+  study_name = models.CharField(max_length=200,null=False)
+  series_name = models.CharField(max_length=200,null=False)
+  protocol_name = models.CharField(max_length=200,null=False)
+  station_name = models.CharField(max_length=200,null=False)
+  manufacturer_name = models.CharField(max_length=200,null=False)
+  body_part_name = models.CharField(max_length=200)
+  slice_thickness = models.IntegerField()
+  echo_time = models.FloatField()
+  magnetic_field_strenght = models.IntegerField()
+  inversion_time = models.IntegerField()
+  patient = models.ForeignKey(Patient)
+
+  def __str__(self):
+      return self.study_name
 
 
 class Data(models.Model):
@@ -55,39 +83,10 @@ class Data(models.Model):
       return self.data_name
 
 
-class Study(models.Model):
-  study_name = models.CharField(max_length=200,null=False)
-  series_name = models.CharField(max_length=200,null=False)
-  protocol_name = models.CharField(max_length=200,null=False)
-  station_name = models.CharField(max_length=200,null=False)
-  manufacturer_name = models.CharField(max_length=200,null=False)
-  body_part_name = models.CharField(max_length=200)
-  slice_thickness = models.IntegerField(min_value=0)
-  echo_time = models.FloatField(min_value=0)
-  magnetic_field_strenght = models.IntegerField(min_value=0)
-  inversion_time = models.IntegerField(min_value=0)
-  patient = models.ForeignKey(Patient)
-
-  def __str__(self):
-      return self.study_name
-
-
-class Patient(models.Model):
-  patient_name = models.CharField(max_length=200)
-  gender = models.CharField(max_length=200)
-  dob = models.DateField()
-  age = models.IntegerField(max_value=200)
-  pathology = models.CharField(max_length=200,null=False)
-  mrn = models.CharField(max_length=200)
-
-  def __str__(self):
-      return self.patient_name
-
-
 class Series(models.Model):
   series_name = models.CharField(max_length=200)
   study = models.ForeignKey(Study)
-  data = models.OnrToOneField(Data)
+  data = models.OneToOneField(Data)
 
   def __str__(self):
       return self.series_name
