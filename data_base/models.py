@@ -29,7 +29,7 @@ class User(models.Model):
 class Feed(models.Model):
   feed_name = models.CharField(max_length=200,null=False)
   time = models.DateTimeField(auto_now=True)
-  progress = models.IntegerField(null=False)
+  status = models.FloatField(null=False)
   duration = models.BigIntegerField(max_length=20,null=False)
   visible = models.BooleanField(default=False)
   user = models.ForeignKey(User)
@@ -73,7 +73,7 @@ class Data(models.Model):
   description = models.CharField(max_length=200,null=False)
   time = models.DateTimeField(auto_now=True)
   nb_files = models.BigIntegerField(max_length=20,null=False)
-  status = models.BigIntegerField(max_length=20,null=False)
+  progress = models.BigIntegerField(max_length=20,null=False)
   user = models.ManyToManyField(User)
   patient = models.ForeignKey(Patient)
   study = models.ForeignKey(Study)
