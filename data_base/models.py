@@ -56,7 +56,7 @@ class Study(models.Model):
     Pathology = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
-    body_part_name = models.CharField(max_length=200)
+    BodyPartExaminated = models.CharField(max_length=200)
     MagneticFieldStrength = models.IntegerField(default=0)
     Modality = models.CharField(max_length=200,null=False)
     StudyInstanceUID = models.CharField(max_length=200,null=False)
@@ -105,7 +105,6 @@ class MR_Params(models.Model):
         return self.Name
 
 
-
 class US_Params(models.Model):
     Name = models.CharField(max_length=200)
     modality_params = models.OneToOneField(Series)
@@ -136,4 +135,4 @@ class Token(models.Model):
     Value = models.CharField(max_length=200,null=False)
 
     def __str__(self):
-        return self.Value
+        return self.Va
