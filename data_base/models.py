@@ -31,7 +31,7 @@ class Feed(models.Model):
     Name = models.CharField(max_length=200,null=False)
     Time = models.DateTimeField(auto_now=True,null=False)
     Status = models.FloatField(null=False)
-    Duration = models.BigIntegerField(max_length=20,null=False)
+    Duration = models.BigIntegerField(null=False)
     Visible = models.BooleanField(default=False)
     user = models.ForeignKey(User)
     tag = models.ManyToManyField(Tag)
@@ -70,8 +70,8 @@ class Data(models.Model):
     Name = models.CharField(max_length=200,null=False)
     Description = models.CharField(max_length=200,null=False)
     Time = models.DateTimeField(auto_now=True,null=False)
-    NbFiles = models.BigIntegerField(max_length=20,null=False)
-    Progress = models.BigIntegerField(max_length=20,null=False)
+    NbFiles = models.BigIntegerField(null=False)
+    Progress = models.BigIntegerField(null=False)
     user = models.ManyToManyField(User)
     patient = models.ForeignKey(Patient)
     study = models.ForeignKey(Study)
@@ -124,7 +124,7 @@ class CT_Params(models.Model):
 class Review(models.Model):
     Name = models.CharField(max_length=200)
     Comment = models.CharField(max_length=200)
-    Rating = models.BigIntegerField(max_length=20)
+    Rating = models.BigIntegerField()
     study = models.ForeignKey(Study)
 
     def __str__(self):
