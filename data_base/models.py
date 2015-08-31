@@ -3,31 +3,31 @@
 from django.db import models
 
 class Group(models.Model):
-    group_name = models.CharField(max_length=200,null=False)
+    name = models.CharField(max_length=200,null=False)
 
     def __str__(self):
-        return self.group_name
+        return self.name
 
 class Tag(models.Model):
-    tag_name = models.CharField(max_length=200,null=False)
+    name = models.CharField(max_length=200,null=False)
     color = models.CharField(max_length=200,null=False)
 
     def __str__(self):
-        return self.tag_name
+        return self.name
 
 
 class User(models.Model):
-  user_name = models.CharField(max_length=200,null=False)
+  name = models.CharField(max_length=200,null=False)
   password = models.CharField(max_length=200,null=False)
   email = models.EmailField(max_length=200,null=False)
-  membership = models.ManyToManyField(Group)
+  group = models.ManyToManyField(Group)
 
   def __str__(self):
-      return self.user_name
+      return self.name
 
 
 class Feed(models.Model):
-  feed_name = models.CharField(max_length=200,null=False)
+  name = models.CharField(max_length=200,null=False)
   time = models.DateTimeField(auto_now=True)
   status = models.FloatField(null=False)
   duration = models.BigIntegerField(max_length=20,null=False)
@@ -36,25 +36,23 @@ class Feed(models.Model):
   tag = models.ManyToManyField(Tag)
 
   def __str__(self):
-      return self.feed_name
+      return self.name
 
 
 class Patient(models.Model):
-  patient_name = models.CharField(max_length=200)
-  gender = models.CharField(max_length=200)
-  dob = models.DateField()
+  name = models.CharField(max_length=200)
+  sex = models.CharField(max_length=200)
+  birthdate = models.DateField()
   age = models.IntegerField(default=0)
-  pathology = models.CharField(max_length=200,null=False)
-  mrn = models.CharField(max_length=200)
+  patientid = models.CharField(max_length=200)
 
   def __str__(self):
-      return self.patient_name
+      return self.name
 
 
 class Study(models.Model):
-  study_name = models.CharField(max_length=200,null=False)
-  series_name = models.CharField(max_length=200,null=False)
-  protocol_name = models.CharField(max_length=200,null=False)
+  name = models.CharField(max_length=200,null=False)
+  pathology = models.CharField(max_length=200,null=False)
   station_name = models.CharField(max_length=200,null=False)
   manufacturer_name = models.CharField(max_length=200,null=False)
   body_part_name = models.CharField(max_length=200)
@@ -62,14 +60,15 @@ class Study(models.Model):
   echo_time = models.FloatField(default=0)
   magnetic_field_strenght = models.IntegerField(default=0)
   inversion_time = models.IntegerField(default=0)
+  instanceUID = models.CharField(max_length=200,null=False)
   patient = models.ForeignKey(Patient)
 
   def __str__(self):
-      return self.study_name
+      return self.name
 
 
 class Data(models.Model):
-  data_name = models.CharField(max_length=200,null=False)
+  name = models.CharField(max_length=200,null=False)
   description = models.CharField(max_length=200,null=False)
   time = models.DateTimeField(auto_now=True)
   nb_files = models.BigIntegerField(max_length=20,null=False)
@@ -80,25 +79,29 @@ class Data(models.Model):
   feed = models.ManyToManyField(Feed)
 
   def __str__(self):
-      return self.data_name
+      return self.name
 
 
 class Series(models.Model):
-  series_name = models.CharField(max_length=200)
+  name = models.CharField(max_length=200)
+  series_name = models.CharField(max_length=200,null=False)
+  instanceUID = models.CharField(max_length=200,null=False)
+  protocol_name = models.CharField(max_length=200,null=False)
   study = models.ForeignKey(Study)
   data = models.OneToOneField(Data)
 
   def __str__(self):
-      return self.series_name
+      return self.name
 
 
-class Reviews(models.Model):
-  reviews_name = models.CharField(max_length=200)
+class Review(models.Model):
+  name = models.CharField(max_length=200)
   comment = models.CharField(max_length=200)
+  rating = models.BigIntegerField(max_length=20,null=False)
   data = models.ForeignKey(Data)
 
   def __str__(self):
-      return self.reviews_name
+      return self.name
 
 
 class Token(models.Model):
