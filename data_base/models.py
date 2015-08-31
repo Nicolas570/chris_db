@@ -28,7 +28,7 @@ class User(models.Model):
 
 class Feed(models.Model):
     Name = models.CharField(max_length=200,null=False)
-    Time = models.DateTimeField(auto_now=True)
+    Time = models.DateTimeField(auto_now=True,null=False)
     Status = models.FloatField(null=False)
     Duration = models.BigIntegerField(max_length=20,null=False)
     Visible = models.BooleanField(default=False)
@@ -57,7 +57,7 @@ class Study(models.Model):
     ManufacturerModelName = models.CharField(max_length=200,null=False)
     body_part_name = models.CharField(max_length=200)
     MagneticFieldStrength = models.IntegerField(default=0)
-    modality = models.CharField(max_length=200)
+    Modality = models.CharField(max_length=200,null=False)
     StudyInstanceUID = models.CharField(max_length=200,null=False)
     patient = models.ForeignKey(Patient)
 
@@ -68,7 +68,7 @@ class Study(models.Model):
 class Data(models.Model):
     Name = models.CharField(max_length=200,null=False)
     Description = models.CharField(max_length=200,null=False)
-    Time = models.DateTimeField(auto_now=True)
+    Time = models.DateTimeField(auto_now=True,null=False)
     NbFiles = models.BigIntegerField(max_length=20,null=False)
     Progress = models.BigIntegerField(max_length=20,null=False)
     user = models.ManyToManyField(User)
@@ -81,7 +81,7 @@ class Data(models.Model):
 
 
 class Series(models.Model):
-    Name = models.CharField(max_length=200)
+    Name = models.CharField(max_length=200,null=False)
     SeriesName = models.CharField(max_length=200,null=False)
     SeriesInstanceUID = models.CharField(max_length=200,null=False)
     ProtocolName = models.CharField(max_length=200,null=False)
@@ -98,7 +98,7 @@ class MR_Params(models.Model):
     EchoTime = models.FloatField(default=0)
     InversionTime = models.IntegerField(default=0)
     RepetionTime = models.IntegerField(default=0)
-    series = models.OneToOneField(Series)
+    modality_params = models.OneToOneField(Series)
 
     def __str__(self):
         return self.Name
@@ -107,7 +107,7 @@ class MR_Params(models.Model):
 
 class US_Params(models.Model):
     Name = models.CharField(max_length=200)
-    series = models.OneToOneField(Series)
+    modality_params = models.OneToOneField(Series)
 
     def __str__(self):
         return self.Name
@@ -115,7 +115,7 @@ class US_Params(models.Model):
 
 class CT_Params(models.Model):
     Name = models.CharField(max_length=200)
-    series = models.OneToOneField(Series)
+    modality_params = models.OneToOneField(Series)
 
     def __str__(self):
         return self.Name
@@ -124,7 +124,7 @@ class CT_Params(models.Model):
 class Review(models.Model):
     Name = models.CharField(max_length=200)
     Comment = models.CharField(max_length=200)
-    Rating = models.BigIntegerField(max_length=20,null=False)
+    Rating = models.BigIntegerField(max_length=20)
     study = models.ForeignKey(Study)
 
     def __str__(self):
