@@ -8,6 +8,7 @@ class Group(models.Model):
     def __str__(self):
         return self.Name
 
+
 class Tag(models.Model):
     Name = models.CharField(max_length=200,null=False)
     Color = models.CharField(max_length=200,null=False)
