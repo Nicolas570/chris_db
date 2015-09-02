@@ -7,7 +7,7 @@ class Patient(models.Model):
     PatientName = models.CharField(max_length=200)
     PatientSex = models.CharField(max_length=200)
     PatientBirthdate = models.DateField()
-    PatientAge = models.IntegerField(default=0)
+    PatientAge = models.CharField(max_length=200)
     PatientId = models.CharField(max_length=200)
 
     def __str__(self):
