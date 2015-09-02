@@ -15,7 +15,7 @@ class Patient(models.Model):
 
 
 class Study(models.Model):
-    Name = models.CharField(max_length=200,null=False)
+    StudyName = models.CharField(max_length=200,null=False)
     Pathology = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
@@ -26,7 +26,7 @@ class Study(models.Model):
     patient = models.ForeignKey(Patient)
 
     def __str__(self):
-        return self.Name
+        return self.StudyName
 
 
 class Series(models.Model):
