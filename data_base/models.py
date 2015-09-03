@@ -30,7 +30,6 @@ class Study(models.Model):
 
 
 class Series(models.Model):
-    Name = models.CharField(max_length=200,null=False)
     SeriesName = models.CharField(max_length=200,null=False)
     SeriesInstanceUID = models.CharField(max_length=200,null=False)
     ProtocolName = models.CharField(max_length=200,null=False)
@@ -41,7 +40,6 @@ class Series(models.Model):
 
 
 class MR_Params(models.Model):
-    Name = models.CharField(max_length=200)
     SliceThickness = models.IntegerField(default=0)
     EchoTime = models.FloatField(default=0)
     InversionTime = models.IntegerField(default=0)
