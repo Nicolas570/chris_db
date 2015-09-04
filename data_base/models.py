@@ -46,9 +46,6 @@ class MR_Params(models.Model):
     RepetionTime = models.IntegerField(default=0)
     modality_params = models.OneToOneField(Series)
 
-    def __str__(self):
-        return self.Name
-
 
 class US_Params(models.Model):
     Name = models.CharField(max_length=200)
