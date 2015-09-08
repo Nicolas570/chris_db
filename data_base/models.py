@@ -8,7 +8,7 @@ class Patient(models.Model):
     PatientName = models.CharField(max_length=200,default='')
     PatientAge = models.CharField(max_length=200,default='')
     PatientSex = models.CharField(max_length=200,default='')
-    PatientBirthdate = models.CharField(max_length=200,default='')
+    PatientBirthDate = models.CharField(max_length=200,default='')
     PatientBirthTime = models.CharField(max_length=200,default='')
 
     def __str__(self):
@@ -16,7 +16,7 @@ class Patient(models.Model):
 
 
 class Study(models.Model):
-    StudyName = models.CharField(max_length=200,null=False)
+    StudyDescription = models.CharField(max_length=200,null=False)
     Pathology = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
@@ -33,11 +33,10 @@ class Study(models.Model):
     patient = models.ForeignKey(Patient)
 
     def __str__(self):
-        return self.StudyName
+        return self.StudyDescription
 
 
 class Series(models.Model):
-    SeriesName = models.CharField(max_length=200,null=False)
     SeriesNumber = models.CharField(max_length=200,null=False)
     SeriesInstanceUID = models.CharField(max_length=200,null=False)
     ProtocolName = models.CharField(max_length=200,null=False)
@@ -53,7 +52,7 @@ class Series(models.Model):
     study = models.ForeignKey(Study)
 
     def __str__(self):
-        return self.SeriesName
+        return self.SeriesDescription
 
 
 class MR_Params(models.Model):

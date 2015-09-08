@@ -13,8 +13,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CT_Params',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(max_length=200)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('Name', models.CharField(default='', max_length=200)),
             ],
             options={
             },
@@ -23,7 +23,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MR_Params',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('PixelSpacing', models.CharField(default='', max_length=200)),
                 ('SliceThickness', models.IntegerField(default=0)),
                 ('EchoTime', models.FloatField(default=0)),
                 ('EchoNumber', models.IntegerField(default=0)),
@@ -37,13 +38,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Patient',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('PatientName', models.CharField(default='', max_length=200)),
-                ('PatientSex', models.CharField(default='', max_length=200)),
-                ('PatientBirthdate', models.DateField(auto_now_add=True)),
-                ('PatientBirthTime', models.DateField(auto_now_add=True)),
-                ('PatientAge', models.CharField(default='', max_length=200)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('PatientId', models.CharField(max_length=200)),
+                ('PatientName', models.CharField(default='', max_length=200)),
+                ('PatientAge', models.CharField(default='', max_length=200)),
+                ('PatientSex', models.CharField(default='', max_length=200)),
+                ('PatientBirthDate', models.CharField(default='', max_length=200)),
+                ('PatientBirthTime', models.CharField(default='', max_length=200)),
             ],
             options={
             },
@@ -52,7 +53,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Review',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('Name', models.CharField(default='', max_length=200)),
                 ('Comment', models.CharField(default='', max_length=200)),
                 ('Rating', models.BigIntegerField()),
@@ -64,18 +65,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Series',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('SeriesName', models.CharField(max_length=200)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('SeriesNumber', models.CharField(max_length=200)),
-                ('SeriesTime', models.CharField(default='', max_length=200)),
-                ('AcquisitionNumber', models.IntegerField(default=0)),
-                ('ContrastAgent', models.CharField(default='', max_length=200)),
-                ('ScaningSequence', models.CharField(default='', max_length=200)),
-                ('SeriesDescription', models.CharField(max_length=200)),
-                ('BodyPartExaminated', models.CharField(default='', max_length=200)),
                 ('SeriesInstanceUID', models.CharField(max_length=200)),
                 ('ProtocolName', models.CharField(max_length=200)),
                 ('Modality', models.CharField(max_length=200)),
+                ('AccessionNumber', models.CharField(default='', max_length=200)),
+                ('SeriesTime', models.CharField(default='', max_length=200)),
+                ('ContrastAgent', models.CharField(default='', max_length=200)),
+                ('ScanningSequence', models.CharField(default='', max_length=200)),
+                ('SeriesDescription', models.CharField(default='', max_length=200)),
+                ('BodyPartExaminated', models.CharField(default='', max_length=200)),
+                ('AcquisitionNumber', models.IntegerField(default=0)),
             ],
             options={
             },
@@ -84,21 +85,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Study',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('StudyName', models.CharField(max_length=200)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('StudyDescription', models.CharField(max_length=200)),
+                ('Pathology', models.CharField(max_length=200)),
+                ('StationName', models.CharField(max_length=200)),
+                ('ManufacturerModelName', models.CharField(max_length=200)),
+                ('StudyInstanceUID', models.CharField(max_length=200)),
                 ('StudyDate', models.CharField(default='', max_length=200)),
                 ('StudyTime', models.CharField(default='', max_length=200)),
                 ('AccessionNumber', models.CharField(default='', max_length=200)),
                 ('InstitutionName', models.CharField(default='', max_length=200)),
                 ('ReferringPhysician', models.CharField(default='', max_length=200)),
-                ('performingPhysiciansName', models.CharField(default='', max_length=200)),
-                ('Pathology', models.CharField(max_length=200)),
-                ('StationName', models.CharField(max_length=200)),
-                ('ManufacturerModelName', models.CharField(max_length=200)),
+                ('PerformingPhysiciansName', models.CharField(default='', max_length=200)),
                 ('ModalitiesInStudy', models.CharField(default='', max_length=200)),
                 ('BodyPartExaminated', models.CharField(default='', max_length=200)),
                 ('MagneticFieldStrength', models.IntegerField(default=0)),
-                ('StudyInstanceUID', models.CharField(max_length=200)),
                 ('patient', models.ForeignKey(to='data_base.Patient')),
             ],
             options={
@@ -108,8 +109,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='US_Params',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(max_length=200)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('Name', models.CharField(default='', max_length=200)),
                 ('modality_params', models.OneToOneField(to='data_base.Series')),
             ],
             options={
