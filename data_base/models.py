@@ -25,10 +25,9 @@ class Study(models.Model):
     StudyTime = models.CharField(max_length=200,default='')
     AccessionNumber = models.CharField(max_length=200,default='')
     InstitutionName = models.CharField(max_length=200,default='')
-    ReferringPhysician =models.CharField(max_length=200,default='')
+    ReferringPhysicianName =models.CharField(max_length=200,default='')
     PerformingPhysicianName = models.CharField(max_length=200,default='')
     ModalitiesInStudy = models.CharField(max_length=200,default='')
-    BodyPartExaminated = models.CharField(max_length=200,default='')
     MagneticFieldStrength = models.IntegerField(default=0)
     patient = models.ForeignKey(Patient)
 
@@ -46,9 +45,8 @@ class Series(models.Model):
     SeriesTime = models.CharField(max_length=200,default='')
     ContrastAgent = models.CharField(max_length=200,default='')
     ScanningSequence = models.CharField(max_length=200,default='')
-    SeriesDescription = models.CharField(max_length=200,default='')
     BodyPartExaminated = models.CharField(max_length=200,default='')
-    AcquisitionNumber = models.IntegerField(default=0)
+    AcquisitionNumber =  models.CharField(max_length=200,default='')
     study = models.ForeignKey(Study)
 
     def __str__(self):
@@ -57,17 +55,17 @@ class Series(models.Model):
 
 class MR_Params(models.Model):
     PixelSpacing = models.CharField(max_length=200,default='')
-    SliceThickness = models.IntegerField(default=0)
-    EchoTime = models.FloatField(default=0)
-    EchoNumber = models.IntegerField(default=0)
-    InversionTime = models.IntegerField(default=0)
-    RepetionTime = models.IntegerField(default=0)
-    modality_params = models.OneToOneField(Series)
+    SliceThickness = models.CharField(max_length=200,default='')
+    EchoTime = models.CharField(max_length=200,default='')
+    EchoNumbers = models.CharField(max_length=200,default='')
+    InversionTime = models.CharField(max_length=200,default='')
+    RepetitionTime = models.CharField(max_length=200,default='')
+    modality_params = models.OneToOneField(Series, primary_key=True)
 
 
 class US_Params(models.Model):
     Name = models.CharField(max_length=200,default='')
-    modality_params = models.OneToOneField(Series)
+    modality_params = models.OneToOneField(Series, primary_key=True)
 
     def __str__(self):
         return self.Name
@@ -75,7 +73,7 @@ class US_Params(models.Model):
 
 class CT_Params(models.Model):
     Name = models.CharField(max_length=200,default='')
-    modality_params = models.OneToOneField(Series)
+    modality_params = models.OneToOneField(Series, primary_key=True)
 
     def __str__(self):
         return self.Name
