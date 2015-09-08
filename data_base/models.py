@@ -26,7 +26,7 @@ class Study(models.Model):
     AccessionNumber = models.CharField(max_length=200,default='')
     InstitutionName = models.CharField(max_length=200,default='')
     ReferringPhysician =models.CharField(max_length=200,default='')
-    PerformingPhysiciansName = models.CharField(max_length=200,default='')
+    PerformingPhysicianName = models.CharField(max_length=200,default='')
     ModalitiesInStudy = models.CharField(max_length=200,default='')
     BodyPartExaminated = models.CharField(max_length=200,default='')
     MagneticFieldStrength = models.IntegerField(default=0)
