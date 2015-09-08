@@ -22,7 +22,7 @@ class Study(models.Model):
     AccessionNumber = models.CharField(max_length=200,default='')
     InstitutionName = models.CharField(max_length=200,default='')
     ReferringPhysician =models.CharField(max_length=200,default='')
-    performingPhysiciansName = models.CharField(max_length=200,default='')
+    PerformingPhysiciansName = models.CharField(max_length=200,default='')
     Pathology = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
@@ -42,7 +42,7 @@ class Series(models.Model):
     SeriesTime = models.CharField(max_length=200,default='')
     AcquisitionNumber = models.IntegerField(default=0)
     ContrastAgent = models.CharField(max_length=200,default='')
-    ScaningSequence = models.CharField(max_length=200,default='')
+    ScanningSequence = models.CharField(max_length=200,default='')
     SeriesDescription = models.CharField(max_length=200,null=False)
     BodyPartExaminated = models.CharField(max_length=200,default='')
     SeriesInstanceUID = models.CharField(max_length=200,null=False)
@@ -56,6 +56,7 @@ class Series(models.Model):
 
 class MR_Params(models.Model):
     SliceThickness = models.IntegerField(default=0)
+    PixelSpacing = models.CharField(max_length=200,default='')
     EchoTime = models.FloatField(default=0)
     EchoNumber = models.IntegerField(default=0)
     InversionTime = models.IntegerField(default=0)
