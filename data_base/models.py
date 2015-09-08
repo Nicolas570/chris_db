@@ -7,8 +7,9 @@ class Patient(models.Model):
     PatientName = models.CharField(max_length=200,default='')
     PatientSex = models.CharField(max_length=200,default='')
     PatientBirthdate = models.DateField(auto_now_add=True)
+    PatientBirthTime = models.DateField(auto_now_add=True)
     PatientAge = models.CharField(max_length=200,default='')
-    PatientId = models.CharField(max_length=200,default='')
+    PatientId = models.CharField(max_length=200,null=False)
 
     def __str__(self):
         return self.PatientName
@@ -16,12 +17,18 @@ class Patient(models.Model):
 
 class Study(models.Model):
     StudyName = models.CharField(max_length=200,null=False)
+    StudyDate = models.CharField(max_length=200,default='')
+    StudyTime = models.CharField(max_length=200,default='')
+    AccessionNumber = models.CharField(max_length=200,default='')
+    InstitutionName = models.CharField(max_length=200,default='')
+    ReferringPhysician =models.CharField(max_length=200,default='')
+    performingPhysiciansName = models.CharField(max_length=200,default='')
     Pathology = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
+    ModalitiesInStudy = models.CharField(max_length=200,default='')
     BodyPartExaminated = models.CharField(max_length=200,default='')
     MagneticFieldStrength = models.IntegerField(default=0)
-    Modality = models.CharField(max_length=200,null=False)
     StudyInstanceUID = models.CharField(max_length=200,null=False)
     patient = models.ForeignKey(Patient)
 
@@ -31,8 +38,16 @@ class Study(models.Model):
 
 class Series(models.Model):
     SeriesName = models.CharField(max_length=200,null=False)
+    SeriesNumber = models.CharField(max_length=200,null=False)
+    SeriesTime = models.CharField(max_length=200,default='')
+    AcquisitionNumber = models.IntegerField(default=0)
+    ContrastAgent = models.CharField(max_length=200,default='')
+    ScaningSequence = models.CharField(max_length=200,default='')
+    SeriesDescription = models.CharField(max_length=200,null=False)
+    BodyPartExaminated = models.CharField(max_length=200,default='')
     SeriesInstanceUID = models.CharField(max_length=200,null=False)
     ProtocolName = models.CharField(max_length=200,null=False)
+    Modality = models.CharField(max_length=200,null=False)
     study = models.ForeignKey(Study)
 
     def __str__(self):
@@ -42,6 +57,7 @@ class Series(models.Model):
 class MR_Params(models.Model):
     SliceThickness = models.IntegerField(default=0)
     EchoTime = models.FloatField(default=0)
+    EchoNumber = models.IntegerField(default=0)
     InversionTime = models.IntegerField(default=0)
     RepetionTime = models.IntegerField(default=0)
     modality_params = models.OneToOneField(Series)
