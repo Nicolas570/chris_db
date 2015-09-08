@@ -17,10 +17,10 @@ class Patient(models.Model):
 
 class Study(models.Model):
     StudyDescription = models.CharField(max_length=200,null=False)
-    Pathology = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
     StudyInstanceUID = models.CharField(max_length=200,null=False)
+    Pathology = models.CharField(max_length=200,default='')
     StudyDate = models.CharField(max_length=200,default='')
     StudyTime = models.CharField(max_length=200,default='')
     AccessionNumber = models.CharField(max_length=200,default='')

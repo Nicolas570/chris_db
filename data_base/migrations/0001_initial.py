@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CT_Params',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('Name', models.CharField(default='', max_length=200)),
             ],
             options={
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MR_Params',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('PixelSpacing', models.CharField(default='', max_length=200)),
                 ('SliceThickness', models.IntegerField(default=0)),
                 ('EchoTime', models.FloatField(default=0)),
@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Patient',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('PatientId', models.CharField(max_length=200)),
                 ('PatientName', models.CharField(default='', max_length=200)),
                 ('PatientAge', models.CharField(default='', max_length=200)),
@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Review',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('Name', models.CharField(default='', max_length=200)),
                 ('Comment', models.CharField(default='', max_length=200)),
                 ('Rating', models.BigIntegerField()),
@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Series',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('SeriesNumber', models.CharField(max_length=200)),
                 ('SeriesInstanceUID', models.CharField(max_length=200)),
                 ('ProtocolName', models.CharField(max_length=200)),
@@ -85,12 +85,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Study',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('StudyDescription', models.CharField(max_length=200)),
-                ('Pathology', models.CharField(max_length=200)),
                 ('StationName', models.CharField(max_length=200)),
                 ('ManufacturerModelName', models.CharField(max_length=200)),
                 ('StudyInstanceUID', models.CharField(max_length=200)),
+                ('Pathology', models.CharField(default='', max_length=200)),
                 ('StudyDate', models.CharField(default='', max_length=200)),
                 ('StudyTime', models.CharField(default='', max_length=200)),
                 ('AccessionNumber', models.CharField(default='', max_length=200)),
@@ -109,7 +109,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='US_Params',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('Name', models.CharField(default='', max_length=200)),
                 ('modality_params', models.OneToOneField(to='data_base.Series')),
             ],
