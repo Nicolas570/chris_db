@@ -67,7 +67,7 @@ class MR_Params(models.Model):
 
 
 class US_Params(models.Model):
-    Name = models.CharField(max_length=200)
+    Name = models.CharField(max_length=200,default='')
     modality_params = models.OneToOneField(Series)
 
     def __str__(self):
@@ -75,7 +75,7 @@ class US_Params(models.Model):
 
 
 class CT_Params(models.Model):
-    Name = models.CharField(max_length=200)
+    Name = models.CharField(max_length=200,default='')
     modality_params = models.OneToOneField(Series)
 
     def __str__(self):
