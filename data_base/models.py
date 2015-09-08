@@ -11,7 +11,6 @@ class Patient(models.Model):
     PatientBirthdate = models.CharField(max_length=200,default='')
     PatientBirthTime = models.CharField(max_length=200,default='')
 
-
     def __str__(self):
         return self.PatientName
 
@@ -51,7 +50,6 @@ class Series(models.Model):
     SeriesDescription = models.CharField(max_length=200,default='')
     BodyPartExaminated = models.CharField(max_length=200,default='')
     AcquisitionNumber = models.IntegerField(default=0)
-
     study = models.ForeignKey(Study)
 
     def __str__(self):
