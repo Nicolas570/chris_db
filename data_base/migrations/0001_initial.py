@@ -11,9 +11,20 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Group',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('GroupName', models.CharField(default='', max_length=200)),
+                ('GroupId', models.CharField(default='', max_length=200)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Patient',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('PatientId', models.CharField(max_length=200)),
                 ('PatientName', models.CharField(default='', max_length=200)),
                 ('PatientAge', models.CharField(default='', max_length=200)),
@@ -28,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Review',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('Name', models.CharField(default='', max_length=200)),
                 ('Comment', models.CharField(default='', max_length=200)),
                 ('Rating', models.BigIntegerField()),
@@ -40,12 +51,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Series',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('SeriesNumber', models.CharField(max_length=200)),
                 ('SeriesInstanceUID', models.CharField(max_length=200)),
                 ('ProtocolName', models.CharField(max_length=200)),
                 ('Modality', models.CharField(max_length=200)),
-                ('AccessionNumber', models.CharField(default='', max_length=200)),
                 ('SeriesDescription', models.CharField(default='', max_length=200)),
                 ('SeriesTime', models.CharField(default='', max_length=200)),
                 ('ContrastAgent', models.CharField(default='', max_length=200)),
@@ -66,7 +76,7 @@ class Migration(migrations.Migration):
                 ('EchoNumbers', models.CharField(default='', max_length=200)),
                 ('InversionTime', models.CharField(default='', max_length=200)),
                 ('RepetitionTime', models.CharField(default='', max_length=200)),
-                ('modality_params', models.OneToOneField(to='data_base.Series', primary_key=True, serialize=False)),
+                ('modality_params', models.OneToOneField(serialize=False, primary_key=True, to='data_base.Series')),
             ],
             options={
             },
@@ -76,7 +86,7 @@ class Migration(migrations.Migration):
             name='CT_Params',
             fields=[
                 ('Name', models.CharField(default='', max_length=200)),
-                ('modality_params', models.OneToOneField(to='data_base.Series', primary_key=True, serialize=False)),
+                ('modality_params', models.OneToOneField(serialize=False, primary_key=True, to='data_base.Series')),
             ],
             options={
             },
@@ -85,7 +95,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Study',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
                 ('StudyDescription', models.CharField(max_length=200)),
                 ('StationName', models.CharField(max_length=200)),
                 ('ManufacturerModelName', models.CharField(max_length=200)),
@@ -99,6 +109,7 @@ class Migration(migrations.Migration):
                 ('PerformingPhysicianName', models.CharField(default='', max_length=200)),
                 ('ModalitiesInStudy', models.CharField(default='', max_length=200)),
                 ('MagneticFieldStrength', models.IntegerField(default=0)),
+                ('group', models.ForeignKey(to='data_base.Group')),
                 ('patient', models.ForeignKey(to='data_base.Patient')),
             ],
             options={
@@ -109,11 +120,31 @@ class Migration(migrations.Migration):
             name='US_Params',
             fields=[
                 ('Name', models.CharField(default='', max_length=200)),
-                ('modality_params', models.OneToOneField(to='data_base.Series', primary_key=True, serialize=False)),
+                ('modality_params', models.OneToOneField(serialize=False, primary_key=True, to='data_base.Series')),
             ],
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='User',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('UserName', models.CharField(default='', max_length=200)),
+                ('RealName', models.CharField(default='', max_length=200)),
+                ('UserID', models.CharField(default='', max_length=200)),
+                ('Email', models.EmailField(default='', max_length=200)),
+                ('group', models.ManyToManyField(to='data_base.Group')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='study',
+            name='user',
+            field=models.ForeignKey(to='data_base.User'),
+            preserve_default=True,
         ),
         migrations.AddField(
             model_name='series',

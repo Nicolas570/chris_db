@@ -3,6 +3,25 @@
 from django.db import models
 
 
+class Group(models.Model):
+    GroupName = models.CharField(max_length=200,default='')
+    GroupId = models.CharField(max_length=200,default='')
+
+    def __str__(self):
+        return self.GroupName
+
+
+class User(models.Model):
+    UserName = models.CharField(max_length=200,default='')
+    RealName = models.CharField(max_length=200,default='')
+    UserID = models.CharField(max_length=200,default='')
+    Email = models.EmailField(max_length=200,default='')
+    group = models.ManyToManyField(Group)
+
+    def __str__(self):
+        return self.UserName
+
+
 class Patient(models.Model):
     PatientId = models.CharField(max_length=200,null=False)
     PatientName = models.CharField(max_length=200,default='')
@@ -30,6 +49,8 @@ class Study(models.Model):
     ModalitiesInStudy = models.CharField(max_length=200,default='')
     MagneticFieldStrength = models.IntegerField(default=0)
     patient = models.ForeignKey(Patient)
+    user= models.ForeignKey(User)
+    group = models.ForeignKey(Group)
 
     def __str__(self):
         return self.StudyDescription
@@ -40,7 +61,6 @@ class Series(models.Model):
     SeriesInstanceUID = models.CharField(max_length=200,null=False)
     ProtocolName = models.CharField(max_length=200,null=False)
     Modality = models.CharField(max_length=200,null=False)
-    AccessionNumber = models.CharField(max_length=200,default='')
     SeriesDescription = models.CharField(max_length=200,default='')
     SeriesTime = models.CharField(max_length=200,default='')
     ContrastAgent = models.CharField(max_length=200,default='')
