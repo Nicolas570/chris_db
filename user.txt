@@ -1,0 +1,13 @@
+---------------------------
+    USER INFORMATION
+---------------------------
+UserName :
+RealName :
+UserID :
+Email :
+
+---------------------------
+    GROUP INFORMATION
+---------------------------
+GroupName :
+GroupId :

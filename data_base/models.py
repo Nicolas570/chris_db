@@ -49,8 +49,6 @@ class Study(models.Model):
     ModalitiesInStudy = models.CharField(max_length=200,default='')
     MagneticFieldStrength = models.IntegerField(default=0)
     patient = models.ForeignKey(Patient)
-    user= models.ForeignKey(User)
-    group = models.ForeignKey(Group)
 
     def __str__(self):
         return self.StudyDescription
@@ -68,6 +66,8 @@ class Series(models.Model):
     BodyPartExaminated = models.CharField(max_length=200,default='')
     AcquisitionNumber =  models.CharField(max_length=200,default='')
     study = models.ForeignKey(Study)
+    user= models.ManyToManyField(User)
+    group = models.ManyToManyField(Group)
 
     def __str__(self):
         return self.SeriesDescription
