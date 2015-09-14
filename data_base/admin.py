@@ -16,7 +16,7 @@ class PatientAdmin(admin.ModelAdmin):
     ]
 
     inlines = [StudyInline]
-
+    search_fields = ['PatientName', 'PatientId', 'PatientAge', 'PatientSex', 'PatientBirthDate']
 
 class SeriesInline(admin.TabularInline):
     model = Series
@@ -33,7 +33,8 @@ class StudyAdmin(admin.ModelAdmin):
     ]
 
     inlines = [SeriesInline]
-
+    search_fields = ['StudyDescription', 'StationName', 'ManufacturerModelName', 'StudyInstanceUID', 'Pathology', 
+    'PerformingPhysicianName', 'ModalitiesInStudy']
 
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(Study, StudyAdmin)
