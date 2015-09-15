@@ -23,7 +23,7 @@ class User(models.Model):
 
 
 class Patient(models.Model):
-    PatientId = models.CharField(max_length=200,null=False)
+    PatientID = models.CharField(max_length=200,null=False)
     PatientName = models.CharField(max_length=200,default='')
     PatientAge = models.CharField(max_length=200,default='')
     PatientSex = models.CharField(max_length=200,default='')
@@ -38,7 +38,7 @@ class Study(models.Model):
     StudyDescription = models.CharField(max_length=200,null=False)
     StationName = models.CharField(max_length=200,null=False)
     ManufacturerModelName = models.CharField(max_length=200,null=False)
-    StudyInstanceUID = models.CharField(max_length=200,null=False)
+    StudyInstanceUID = models.CharField(max_length=500,null=False)
     Pathology = models.CharField(max_length=200,default='')
     StudyDate = models.CharField(max_length=200,default='')
     StudyTime = models.CharField(max_length=200,default='')
@@ -56,7 +56,7 @@ class Study(models.Model):
 
 class Series(models.Model):
     SeriesNumber = models.CharField(max_length=200,null=False)
-    SeriesInstanceUID = models.CharField(max_length=200,null=False)
+    SeriesInstanceUID = models.CharField(max_length=500,null=False)
     ProtocolName = models.CharField(max_length=200,null=False)
     Modality = models.CharField(max_length=200,null=False)
     SeriesDescription = models.CharField(max_length=200,default='')

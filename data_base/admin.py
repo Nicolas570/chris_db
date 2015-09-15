@@ -10,13 +10,13 @@ class StudyInline(admin.TabularInline):
 class PatientAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['PatientName']}),
-        ('Patient information', {'fields': ['PatientId', 'PatientAge', 'PatientSex', 'PatientBirthDate'],
+        ('Patient information', {'fields': ['PatientID', 'PatientAge', 'PatientSex', 'PatientBirthDate'],
         'classes': ['collapse']},
         ),
     ]
 
     inlines = [StudyInline]
-    search_fields = ['PatientName', 'PatientId', 'PatientAge', 'PatientSex', 'PatientBirthDate']
+    search_fields = ['PatientName', 'PatientID', 'PatientAge', 'PatientSex', 'PatientBirthDate']
 
 class SeriesInline(admin.TabularInline):
     model = Series
@@ -33,7 +33,7 @@ class StudyAdmin(admin.ModelAdmin):
     ]
 
     inlines = [SeriesInline]
-    search_fields = ['StudyDescription', 'StationName', 'ManufacturerModelName', 'StudyInstanceUID', 'Pathology', 
+    search_fields = ['StudyDescription', 'StationName', 'ManufacturerModelName', 'StudyInstanceUID', 'Pathology',
     'PerformingPhysicianName', 'ModalitiesInStudy']
 
 admin.site.register(Patient, PatientAdmin)
