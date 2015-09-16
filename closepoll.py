@@ -5,13 +5,18 @@ from polls.models import Patient, Study, Series, MR_Params, US_Params, CT_Params
 
 
 class Command(BaseCommand):
-    help = 'that does my stuff'
+    help = 'Find .dcm files and complite tables'
 
 
     def handle(self, *args, **options):
+       
+       dcmTree = '/neuro/users/chris/data'
+       if len(args) == 2:
+           if args[0] == 'path':
+               dcmTree = args[1]
 
        #for dossier, sous_dossiers, fichiers in os.walk('/neuro/users/yann.mallegol/Documents/internship/chris-db/python_test/dicoms'):
-       for dossier, sous_dossiers, fichiers in os.walk('/neuro/users/chris/data'):
+       for dossier, sous_dossiers, fichiers in os.walk(dcmTree):
            for fichier in fichiers:
                fullpath = os.path.join(dossier, fichier)
                if fichier.endswith('.dcm'):
@@ -205,33 +210,6 @@ class Command(BaseCommand):
 
                   b6=CT_Params(Name=Name,modality_params=b3)
                   b6.save()
-
-                  ##################### Review  ################
-
-                  try:
-                    Name=ds.Name
-                  except NameError:
-                    Name = 'undefined'
-                  except AttributeError:
-                    Name = 'undefined'
-
-                  try:
-                    Comment=ds.Comment
-                  except NameError:
-                    Comment = 'undefined'
-                  except AttributeError:
-                    Comment = 'undefined'
-
-                  try:
-                    Rating=ds.Rating
-                  except NameError:
-                    Rating = 0
-                  except AttributeError:
-                    Rating = 0
-
-
-                  b7=Review(Name=Name,Comment=Comment,Rating=Rating, study=search2.first(),serie=b3)
-                  b7.save()
 
 
                 elif search3.exists():
@@ -492,33 +470,6 @@ class Command(BaseCommand):
 
                   b6=CT_Params(Name=Name,modality_params=b3)
                   b6.save()
-
-                  ##################### Review  ################
-
-                  try:
-                    Name=ds.Name
-                  except NameError:
-                    Name = 'undefined'
-                  except AttributeError:
-                    Name = 'undefined'
-
-                  try:
-                    Comment=ds.Comment
-                  except NameError:
-                    Comment = 'undefined'
-                  except AttributeError:
-                    Comment = 'undefined'
-
-                  try:
-                    Rating=ds.Rating
-                  except NameError:
-                    Rating = 0
-                  except AttributeError:
-                    Rating = 0
-
-
-                  b7=Review(Name=Name,Comment=Comment,Rating=Rating, study=search2.first(),serie=b3)
-                  b7.save()
 
 
                 else:
@@ -830,36 +781,6 @@ class Command(BaseCommand):
 
                   b6=CT_Params(Name=Name,modality_params=b3)
                   b6.save()
-
-                  ##################### Review  ################
-
-                  try:
-                    Name=ds.Name
-                  except NameError:
-                    Name = 'undefined'
-                  except AttributeError:
-                    Name = 'undefined'
-
-                  try:
-                    Comment=ds.Comment
-                  except NameError:
-                    Comment = 'undefined'
-                  except AttributeError:
-                    Comment = 'undefined'
-
-                  try:
-                    Rating=ds.Rating
-                  except NameError:
-                    Rating = 0
-                  except AttributeError:
-                    Rating = 0
-
-                  b7=Review(Name=Name,Comment=Comment,Rating=Rating, study=b2,serie=b3)
-                  b7.save()
-
-
-
-
 
 
                else:
