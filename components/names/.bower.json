@@ -1,0 +1,14 @@
+{
+  "name": "names",
+  "homepage": "https://github.com/treyhunner/names",
+  "version": "0.3.0",
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.3.0",
+    "commit": "74f46c97ef862358da7cd003e8f3d5234312a6d9"
+  },
+  "_source": "https://github.com/treyhunner/names.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/treyhunner/names.git"
+}

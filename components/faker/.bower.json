@@ -1,0 +1,14 @@
+{
+  "name": "faker",
+  "homepage": "https://github.com/joke2k/faker",
+  "version": "0.5.3",
+  "_release": "0.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.3",
+    "commit": "dabf922af72783ebd9d163611ab0f4f307156443"
+  },
+  "_source": "https://github.com/joke2k/faker.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/joke2k/faker.git"
+}

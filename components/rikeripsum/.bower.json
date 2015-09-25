@@ -1,0 +1,13 @@
+{
+  "name": "rikeripsum",
+  "homepage": "https://github.com/ben174/rikeripsum",
+  "_release": "3d0c6f391d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3d0c6f391d25bf57cb4fafdc5e760f3b84312eb2"
+  },
+  "_source": "https://github.com/ben174/rikeripsum.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/ben174/rikeripsum.git"
+}
