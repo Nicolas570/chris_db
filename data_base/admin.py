@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Patient,Study,Series,MR_Params,US_Params,CT_Params,Review
+# Register your models here.
+from .models import Patient,Study,Series,MR_Params,US_Params,CT_Params,Group,User
 
 class StudyInline(admin.TabularInline):
     model = Study
@@ -16,10 +17,23 @@ class PatientAdmin(admin.ModelAdmin):
     ]
 
     inlines = [StudyInline]
+    list_display = ('PatientName', 'PatientID', 'PatientAge', 'PatientSex', 'PatientBirthDate')
     search_fields = ['PatientName', 'PatientID', 'PatientAge', 'PatientSex', 'PatientBirthDate']
+
 
 class SeriesInline(admin.TabularInline):
     model = Series
+
+class SeriesAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['SeriesInstanceUID']}),
+        ( 'Series information', {'fileds':['SeriesNumber','SeriesInstanceUID', 'ProtocolName', 'Modality',
+         'SeriesDescription', 'SeriesTime', 'ContrastAgent','ScanningSequence','BodyPartExaminated','AcquisitionNumber'],
+         'classes': ['collapse']},
+         ),
+    ]
+    list_display = ('SeriesInstanceUID','SeriesNumber','SeriesInstanceUID', 'ProtocolName', 'Modality','SeriesDescription', 'SeriesTime', 'ContrastAgent','ScanningSequence','BodyPartExaminated','AcquisitionNumber')
+    search_fields = ['SeriesInstanceUID','SeriesNumber','SeriesInstanceUID', 'ProtocolName', 'Modality','SeriesDescription', 'SeriesTime', 'ContrastAgent','ScanningSequence','BodyPartExaminated','AcquisitionNumber']
 
 
 class StudyAdmin(admin.ModelAdmin):
@@ -33,12 +47,26 @@ class StudyAdmin(admin.ModelAdmin):
     ]
 
     inlines = [SeriesInline]
+    list_display = ('StudyDescription', 'StationName', 'ManufacturerModelName', 'StudyInstanceUID', 'Pathology',
+    'PerformingPhysicianName', 'ModalitiesInStudy')
     search_fields = ['StudyDescription', 'StationName', 'ManufacturerModelName', 'StudyInstanceUID', 'Pathology',
     'PerformingPhysicianName', 'ModalitiesInStudy']
 
+
+class UserAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['UserName']}),
+        ('User information', {'fields': ['RealName', 'UserID', 'Email'],
+        'classes': ['collapse']},
+        ),
+    ]
+
+
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(Study, StudyAdmin)
+admin.site.register(Series)
 admin.site.register(MR_Params)
 admin.site.register(US_Params)
 admin.site.register(CT_Params)
-admin.site.register(Review)
+admin.site.register(User, UserAdmin)
+admin.site.register(Group)

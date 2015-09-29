@@ -2,10 +2,15 @@
 
 from django.db import models
 
+################################################################################
+# creation of class which match to one tables
+# then we declare each field of the table
+################################################################################
 
 class Group(models.Model):
     GroupName = models.CharField(max_length=200,default='')
     GroupId = models.CharField(max_length=200,default='')
+    GroupProject = models.CharField(max_length=200,default='')
 
     def __str__(self):
         return self.GroupName
@@ -65,9 +70,10 @@ class Series(models.Model):
     ScanningSequence = models.CharField(max_length=200,default='')
     BodyPartExaminated = models.CharField(max_length=200,default='')
     AcquisitionNumber =  models.CharField(max_length=200,default='')
+    #MetaInfo = models.TextField(max_length=100000,default='')
     study = models.ForeignKey(Study)
     user= models.ManyToManyField(User)
-    group = models.ManyToManyField(Group)
+    # group = models.ManyToManyField(Group)
 
     def __str__(self):
         return self.SeriesDescription
@@ -99,12 +105,12 @@ class CT_Params(models.Model):
         return self.Name
 
 
-class Review(models.Model):
-    Name = models.CharField(max_length=200,default='')
-    Comment = models.CharField(max_length=200,default='')
-    Rating = models.BigIntegerField()
-    study = models.ForeignKey(Study)
-    serie = models.ForeignKey(Series)
-
-    def __str__(self):
-        return self.Name
+# class Review(models.Model):
+#     Name = models.CharField(max_length=200,default='')
+#     Comment = models.CharField(max_length=200,default='')
+#     Rating = models.BigIntegerField()
+#     study = models.ForeignKey(Study)
+#     serie = models.ForeignKey(Series)
+#
+#     def __str__(self):
+#         return self.Name
